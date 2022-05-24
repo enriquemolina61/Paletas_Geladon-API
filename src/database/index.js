@@ -41,7 +41,7 @@ const paletas = [
   },
   {
     id: 6,
-    sabor: 'Milho Verde',
+    sabor: 'Limão',
     descricao:
       'Paleta sabor limão, para dar aquela refrescância!',
     foto: 'assets/images/limao.png',
