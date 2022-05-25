@@ -1,3 +1,15 @@
+import { connect } from 'mongoose';
+
+ export const conectarAoDataBase = () => {
+  connect('mongodb://localhost:27017/elgeladon_db')
+    .then(() => {
+      console.log('Mongo Db conectado!');
+    })
+    .catch((err) => {
+      console.log(`Erro na conexao com o MongoDB: ${err}`);
+    });
+};
+
 const paletas = [
   {
     id: 1,
