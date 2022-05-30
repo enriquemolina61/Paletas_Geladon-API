@@ -1,11 +1,11 @@
-import PaletasServices from '../services/paletas.service';
+import PaletasServices from '../services/paletas.services';
 
 const paletasServices = new PaletasServices();
 
 class PaletasControllers {
-  listarTodas(request, response) {
+  async listarTodas(request, response) {
     try {
-      const paletas = paletasServices.listarTodas();
+      const paletas = await paletasServices.listarTodas();
 
       response.send(paletas);
     } catch (error) {
@@ -13,48 +13,60 @@ class PaletasControllers {
     }
   }
 
-  listarUmaPaletaPorId(request, response) {
-    const id = +request.params.id;
+  async listarUmaPaletaPorId(request, response) {
+    const id = request.params.id;
 
-    const paleta = paletasServices.listarUmaPaletaPorId({ id });
+    const paleta = await paletasServices.listarUmaPaletaPorId({ id });
 
     response.send(paleta);
   }
 
-  criarNovaPaleta(request, response) {
+  async criarNovaPaleta(request, response) {
     const { sabor, descricao, foto, preco } = request.body;
 
-    const novaPaleta = paletasServices.criarNovaPaleta({
-      sabor,
-      descricao,
-      preco,
-      foto,
-    });
+    try {
+      const novaPaleta = await paletasServices.criarNovaPaleta({
+        sabor,
+        descricao,
+        preco,
+        foto,
+      });
 
-    response.status(201).send(novaPaleta);
+      response.status(201).send(novaPaleta);
+    } catch (error) {
+      if (error.code === 11000) {
+        response.status(400).send('Sabor já cadastrado');
+      }
+    }
   }
 
-  atualizarPaleta(request, response) {
+  async atualizarPaleta(request, response) {
     const { sabor, descricao, foto, preco } = request.body;
-    const id = +request.params.id;
+    const id = request.params.id;
 
-    const paletaAtualizada = paletasServices.atualizarPaleta({
-      sabor,
-      descricao,
-      foto,
-      preco,
-      id,
-    });
+    try {
+      const paletaAtualizada = await paletasServices.atualizarPaleta({
+        sabor,
+        descricao,
+        foto,
+        preco,
+        id,
+      });
 
-    response.send(paletaAtualizada);
+      response.send(paletaAtualizada);
+    } catch (error) {
+      if (error.code === 11000) {
+        response.status(400).send('Sabor já cadastrado');
+      }
+    }
   }
 
-  excluirPaleta(request, response) {
-    const id = +request.params.id;
+  async excluirPaleta(request, response) {
+    const id = request.params.id;
 
-    paletasServices.excluirPaleta({ id });
+    const paleta = await paletasServices.excluirPaleta({ id });
 
-    response.sendStatus(204);
+    response.status(200).send(paleta);
   }
 }
 

@@ -1,9 +1,9 @@
 import app from './app';
-import { conectarAoDataBase } from './database';
+import { conectarAoDatabase } from './database';
 
-const port = 3005;
+const port = 3000;
 
 app.listen(port, () => {
-  conectarAoDataBase();
+  conectarAoDatabase();
   console.log(`A aplicação está rodando na porta http://localhost:${port}`);
 });
