@@ -1,5 +1,4 @@
 import paletasRouter from './routes/paletas.routes';
-// Importou as novas rotas
 import usuariosRouter from './routes/usuarios.routes';
 import loginRouter from './routes/login.routes';
 import express from 'express';
