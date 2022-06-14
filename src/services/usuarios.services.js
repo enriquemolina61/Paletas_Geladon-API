@@ -15,7 +15,8 @@ class UsuariosServices {
   }
 
   async criarNovoUsuario({ email, nome, senha, adm }) {
-
+    // Criptografamos a senha para salvar ela seguramente no banco de dados
+    // Recebe 2 Paramêtros, o primeiro é a senha e o segundo é o número de vezes que ela será criptografada
     const senhaCriptografada = await bcryptjs.hash(senha, 8);
 
     const novoUsuario = {
