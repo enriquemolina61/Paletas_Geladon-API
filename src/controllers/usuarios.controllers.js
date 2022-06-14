@@ -1,4 +1,4 @@
-import UsuariosServices from '../services/usuarios.services';
+import UsuariosServices from '../services/usuarios.services.js';
 
 const usuariosServices = new UsuariosServices();
 
@@ -18,7 +18,12 @@ class UsuariosControllers {
   }
 
   async criarNovoUsuario(request, response) {
+    // const email = request.body.email;
+    // const nome = request.body.nome;
+    // const senha = request.body.senha;
+    // const adm = request.body.adm;
 
+    // /\  Mesma coisa da linha de baixo \/
 
     const { email, nome, senha, adm } = request.body;
 
